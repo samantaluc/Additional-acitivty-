@@ -2,9 +2,7 @@ const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Constraint = Matter.Constraint;
-var engine,
-  world,
-  backgroundImg;
+var engine, world, backgroundImg;
 var canvas, angle, tower, ground, cannon, boat;
 var balls = [];
 var boats = [];
@@ -66,8 +64,6 @@ function draw() {
   background(189);
   image(backgroundImg, 0, 0, width, height);
 
-  
-
   Engine.update(engine);
   ground.display();
 
@@ -121,7 +117,7 @@ function showCannonBalls(ball, index) {
   }
 }
 
-function showBoats() {  
+function showBoats() {
   if (boats.length > 0) {
     if (
       boats.length < 4 &&
@@ -167,4 +163,20 @@ function keyReleased() {
   }
 }
 
-
+function gameOver() {
+  swal(
+    {
+      title: `Game Over!!!`,
+      text: "Thanks for playing!!",
+      imageUrl:
+        "https://raw.githubusercontent.com/whitehatjr/PiratesInvasion/main/assets/boat.png",
+      imageSize: "150x150",
+      confirmButtonText: "Play Again"
+    },
+    function(isConfirm) {
+      if (isConfirm) {
+        location.reload();
+      }
+    }
+  );
+}
