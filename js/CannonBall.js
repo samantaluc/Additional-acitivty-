@@ -6,7 +6,7 @@ class CannonBall {
       density: 1.0,
       isStatic: true
     };
-    this.r = 40;
+    this.r = 30;
     this.speed = 0.05;
     this.body = Bodies.circle(x, y, this.r, options);
     this.image = loadImage("./assets/cannonball.png");

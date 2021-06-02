@@ -7,12 +7,12 @@ class Cannon {
     this.angle = angle;
   }
   display() {
-    if (keyIsDown(RIGHT_ARROW) && this.angle < 0.1) {
-      this.angle += 0.01;
+    if (keyIsDown(RIGHT_ARROW) && this.angle < 0.35) {
+      this.angle += 0.02;
     }
 
     if (keyIsDown(LEFT_ARROW) && this.angle > -1.45) {
-      this.angle -= 0.01;
+      this.angle -= 0.02;
     }
 
     fill("#676e6a");
@@ -21,7 +21,7 @@ class Cannon {
     rotate(this.angle);
     rect(-10, -20, this.width, this.height);
     pop();
-    arc(this.x - 40, this.y + 80, 180, 230, PI, TWO_PI);
+    arc(this.x - 30, this.y + 90, 140, 200, PI, TWO_PI);
     noFill();
   }
 }
