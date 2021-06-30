@@ -69,24 +69,9 @@ function draw() {
 
   showBoats();
 
+ 
   for (var i = 0; i < balls.length; i++) {
     showCannonBalls(balls[i], i);
-    for (var j = 0; j < boats.length; j++) {
-      if (balls[i] !== undefined && boats[j] !== undefined) {
-        var collision = Matter.SAT.collides(balls[i].body, boats[j].body);
-        if (collision.collided) {
-          if (!boats[j].isBroken && !balls[i].isSink) {
-            score += 5;
-            boats[j].remove(j);
-            j--;
-          }
-
-          Matter.World.remove(world, balls[i].body);
-          balls.splice(i, 1);
-          i--;
-        }
-      }
-    }
   }
 
   cannon.display();
