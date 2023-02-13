@@ -13,51 +13,40 @@ class CannonBall {
     this.animation = [this.image];
     this.tower = loadImage("./assets/gray.jpg");
     this.trajectory = [];
-    this.isSink = false;
+    this.isSink = false; //valor de afundar como falso inicialmente
     World.add(world, this.body);
   }
-
   animate() {
-    this.speed += 0.05 % 1.1;
+    this.speed += 0.05 % 1.1; //dá a velocidade da execução da animação
   }
-
-  remove(index) {
-    this.isSink = true;
-    Matter.Body.setVelocity(this.body, { x: 0, y: 0 });
-
-    this.animation = waterSplashAnimation;
-    this.speed = 0.05;
-    this.r = 150;
-    setTimeout(() => {
-      Matter.World.remove(world, this.body);
-      balls.splice(index, 1);
-    }, 1000);
+  remove(index) { //tipo de remoção da bola assim que afunda
+    this.isSink = true; //está afundando
+    Matter.Body.setVelocity(this.body, { x: 0, y: 0 }); //velocidade do corpo zerada
+    this.animation = waterSplashAnimation; //executa a animação
+    this.speed = 0.05; //executar a velocidade da animação
+    this.r = 150; //raio da imagem
+    setTimeout(() => { //assim que o tempo acabar
+      Matter.World.remove(world, this.body); //remover a bola do mundo
+      balls.splice(index, 1); //remover da matriz
+    }, 1000); //o tempo limite é de 1000 milissegundos, ou seja, 1 segundo
   }
-
   shoot() {
     var velocity = p5.Vector.fromAngle(cannon.angle);
     velocity.mult(20);
     Matter.Body.setStatic(this.body, false);
     Matter.Body.setVelocity(this.body, { x: velocity.x, y: velocity.y });
   }
-
   display() {
     var angle = this.body.angle;
     var pos = this.body.position;
-    var index = floor(this.speed % this.animation.length);
-
+    var index = floor(this.speed % this.animation.length); //demonstra a animação com a velocidade
     push();
     translate(pos.x, pos.y);
     rotate(angle);
     imageMode(CENTER);
     image(this.animation[index], 0, 0, this.r, this.r);
     pop();
-
-    if (
-      this.body.velocity.x > 0 &&
-      this.body.position.x > 300 &&
-      !this.isSink
-    ) {
+    if (this.body.velocity.x > 0 && this.body.position.x > 300 && !this.isSink) {
       var position = [this.body.position.x, this.body.position.y];
       this.trajectory.push(position);
     }
