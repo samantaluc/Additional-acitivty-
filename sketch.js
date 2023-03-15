@@ -85,54 +85,29 @@ function showCannonBalls(ball, index) { //modificar o conteudo
   if (ball.body.position.x >= width || ball.body.position.y >= height - 50) { //modificar o conteudo de dentro
     if (!ball.isSink) { //se a bola não está afundando
       ball.remove(index); //remover a bola do indice
-    }
-  }
-}
+    }  }}
 function showBoats() {
-  if (boats.length > 0) {
-    if (
+  if (boats.length > 0) {    if (
       boats.length < 4 &&
-      boats[boats.length - 1].body.position.x < width - 300
-    ) {
+      boats[boats.length - 1].body.position.x < width - 300    ) {
       var positions = [-40, -60, -70, -20];
       var position = random(positions);
-      var boat = new Boat(
-        width,
-        height - 100,
-        170,
-        170,
-        position,
-        boatAnimation
+      var boat = new Boat(        width,        height - 100,        170,        170,        position,        boatAnimation
       );
-
-      boats.push(boat);
-    }
-
-    for (var i = 0; i < boats.length; i++) {
-      Matter.Body.setVelocity(boats[i].body, {
-        x: -0.9,
-        y: 0
-      });
-
+      boats.push(boat); }    for (var i = 0; i < boats.length; i++) {
+      Matter.Body.setVelocity(boats[i].body, {       x: -0.9,       y: 0     });
       boats[i].display();
       boats[i].animate();
       var collision = Matter.SAT.collides(tower.body, boats[i].body);
       if (collision.collided && !boats[i].isBroken) {
         isGameOver = true;
-        gameOver();
-      }
-    }
-  } else {
+        gameOver();     }   } } else {
     var boat = new Boat(width, height - 60, 170, 170, -60, boatAnimation);
-    boats.push(boat);
-  }
-}
-
+    boats.push(boat);  }}
 function keyReleased() {
   if (keyCode === DOWN_ARROW && !isGameOver) { //adicionar que nao está no estado de fim de jogo
     balls[balls.length - 1].shoot();
-  }
-}
+  }}
 
 function gameOver() { //abre uma janela de confirmação
   swal(
